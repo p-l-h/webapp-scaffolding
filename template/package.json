@@ -5,12 +5,16 @@
   "author": "{{ author }}",
   "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
-    "build": "node build/build.js"{{#unit}},
+    "dev": "babel-node build/server.js",
+    {{#unit}}
     "unit": "karma start test/unit/karma.conf.js --single-run"{{/unit}}{{#e2e}},
     "e2e": "node test/e2e/runner.js"{{/e2e}}{{#if_or unit e2e}},
-    "test": "{{#unit}}npm run unit{{/unit}}{{#unit}}{{#e2e}} && {{/e2e}}{{/unit}}{{#e2e}}npm run e2e{{/e2e}}"{{/if_or}}{{#lint}},
-    "lint": "eslint --ext .js app{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}"{{/lint}}
+    "test": "{{#unit}}npm run unit{{/unit}}{{#unit}}{{#e2e}} && {{/e2e}}{{/unit}}{{#e2e}}npm run e2e{{/e2e}}"{{/if_or}}
+    {{#lint}}
+    "lint": "eslint --ext .js app{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}",
+    {{/lint}}
+    "build": "babel- build/build.js",
+    "i"
   },
   "browserify": {
     "transform": [
@@ -24,6 +28,7 @@
     "browserify": "^13.0.1",
     "map-stream": "^0.0.6",
     "uglify-js": "^2.7.4",
+    "txicons": "^0.1.1",
     {{#lint}}
     "babel-eslint": "^7.0.0",
     {{/lint}}
@@ -77,6 +82,7 @@
     {{#swig}}
     "swig": "^1.4.2",
     {{/swig}}
+    "node-sass": "^3.12.5"
   },
   "engines": {
     "node": ">= 4.5.0"

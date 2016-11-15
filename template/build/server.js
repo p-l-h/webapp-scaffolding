@@ -43,7 +43,8 @@ server.route({
     path: '/app/{param*}',
     method: 'GET',
     handler: (request, reply) => {
-        let filePath = 'app/' + request.params.param;
+        let filePath = 'app/' + request.params.param
+        let length = filePath.length;
         
         if (filePath.slice(length - 4, length) === '.css') {
             filePath = filePath.replace('.css', 'scss');
@@ -82,7 +83,7 @@ server.route({
     }
 });
 
-  
+// regist other request
 initServer(server);
   
 server.connection({
