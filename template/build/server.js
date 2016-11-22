@@ -56,7 +56,7 @@ server.route({
         let length = filePath.length;
 
         if (filePath.slice(length - 4, length) === '.css') {
-            filePath = filePath.replace('.css', 'scss');
+            filePath = filePath.replace('.css', '.scss');
         }
 
         try {
@@ -67,20 +67,20 @@ server.route({
             }
             else {
                 switch(path.extname(filePath)){
-                    case 'js':
+                    case '.js':
                         dealJs(filePath, false, (result) => {
                             reply(result)
                                 .type('text/javascript');
                         });
                         break;
-                    case 'scss':
+                    case '.scss':
                         dealScss(filePath, false, (result) => {
                             reply(result)
                                 .type('text/css');
                         });
                         break;
                     default:
-                        reply.continue();
+                        reply.file(filePath);
                         break;
                 }
             }
