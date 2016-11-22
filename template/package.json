@@ -82,7 +82,12 @@
     {{#swig}}
     "swig": "^1.4.2",
     {{/swig}}
-    "node-sass": "^3.12.5"
+    {{#browsersync}}
+    "browser-sync": "^2.17.6",
+    {{/browsersync}}
+    "node-sass": "^3.12.5",
+    "postcss": "^5.2.5",
+    "autoprefixer": "^6.5.3"
   },
   "engines": {
     "node": ">= 4.5.0"

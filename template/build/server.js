@@ -15,16 +15,23 @@ import {swig} from './swig';
 {{/swig}}
 
 
-const server = new Server({
-    connection: {
+const server = new Hapi.Server({
+    connections: {
         state: {
-            ingoreErrors: true
+            ignoreErrors: true
         }
     }
 });
 
+
+
 // regist the static file and directory handlers
 server.register(Inert);
+
+server.connection({
+    host: '0.0.0.0',
+    port: {{localPort}}
+});
 
 // serve all static files
 server.route({
@@ -43,16 +50,18 @@ server.route({
     path: '/app/{param*}',
     method: 'GET',
     handler: (request, reply) => {
+
+
         let filePath = 'app/' + request.params.param
         let length = filePath.length;
-        
+
         if (filePath.slice(length - 4, length) === '.css') {
             filePath = filePath.replace('.css', 'scss');
         }
-        
+
         try {
             let fileStat = fs.statSync(filePath);
-            
+
             if (fileStat.isDirectory()) {
                 reply.continue();
             }
@@ -75,7 +84,7 @@ server.route({
                         break;
                 }
             }
-            
+
         }
         catch (e) {
             reply.continue();
@@ -85,11 +94,8 @@ server.route({
 
 // regist other request
 initServer(server);
-  
-server.connection({
-    host: '0.0.0.0'
-});
-  
+
+
 server.start(
     (err) => {
         if (err) {

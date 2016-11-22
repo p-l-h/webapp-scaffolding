@@ -28,6 +28,14 @@ module.exports = {
       "type": "confirm",
       "message": "Use swig as the html template?"
     },
+    "localPort": {
+      "type": "string",
+      "message": "The local server port?"
+    },
+    "browsersync": {
+        "type": "confirm",
+        "message": "Use browser sync?"
+    },
     "lint": {
       "type": "confirm",
       "message": "Use ESLint to lint your code?"
