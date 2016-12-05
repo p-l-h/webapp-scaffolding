@@ -20,9 +20,9 @@ swig.setFilter('striptags', function(input) {
 
 swig.setDefaults({
     cache: false,
-    loader: { 
+    loader: {
         resolve: function (to, from) {
-            
+
             if (to.indexOf('.html') < 0) {
                 to = to + '.html';
             }
@@ -45,9 +45,9 @@ swig.setDefaults({
             else {
                 fs.readFile(dirRoot + '/' + identifier, encoding, cb);
             }
-            
+
         }
     }
 });
 
-export swig;
+export default swig;

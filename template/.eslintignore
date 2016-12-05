@@ -1,2 +1,4 @@
 output/*.js
 build/*.js
+gulpfile.babel.js
+node_modules/**/*.js
