@@ -4,6 +4,7 @@ import gulp from 'gulp';
 import mapStream from 'map-stream';
 import replace from 'gulp-replace';
 import htmlmin from 'gulp-htmlmin';
+import md5plus from 'gulp-md5-plus';
 
 
 import yargs from 'yargs';
@@ -71,5 +72,11 @@ gulp.task('html', () => {
             collapseWhitespace: true,
             ignoreCustomFragments: [ /\{%[\s\S]*?%\}/, /\{\{\?[\s\S]*?\?\}\}/]
         }))
+        .pipe(gulp.dest('output/app/'));
+});
+
+gulp.task('md5', () => {
+    gulp.task(['output/app/**/*.js', 'output/app/**/*.css'])
+        .pipe(md5plus(10, 'output/app/**/*.html'))
         .pipe(gulp.dest('output/app/'));
 });
