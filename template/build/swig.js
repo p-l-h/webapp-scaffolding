@@ -18,6 +18,13 @@ swig.setFilter('striptags', function(input) {
     return input;
 });
 
+swig.setFilter(
+    'numberformat',
+    (input) => {
+        return input;
+    }
+);
+
 swig.setDefaults({
     cache: false,
     loader: {

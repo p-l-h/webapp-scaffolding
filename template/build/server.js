@@ -45,6 +45,10 @@ server.route({
     }
 });
 
+server.route({
+    path: '/app/{param}/{}'
+})
+
 // serve the static files need precompiled
 server.route({
     path: '/app/{param*}',

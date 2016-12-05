@@ -5,23 +5,19 @@ import uglifyJs from 'uglify-js';
 
 
 export default function (filePath, minify, callback) {
-    
     callback = callback || function() {};
-    
     browserify().add(filePath)
         .bundle(
             (err, buf) => {
                 if (err) {
-                    console.err(err);
+                    console.error(err);
                 }
-                
+
+                let result = String(buf);
                 if (minify) {
-                    callback(uglifyJs(String(buf)));
+                    result = uglifyJs(result);
                 }
-                else {
-                    callback(String(buf));
-                }
-                
+                callback(result);
             }
         );
-} 
+}

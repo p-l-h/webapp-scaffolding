@@ -78,5 +78,5 @@ module.exports = {
     "test/unit/**/*": "unit",
     "test/e2e/**/*": "e2e"
   },
-  "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dev\n\n"
+  "completeMessage": "To get started:\n  npm install\n  npm run dev\n\n"
 };

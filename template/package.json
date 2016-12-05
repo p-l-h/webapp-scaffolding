@@ -13,13 +13,13 @@
     {{#lint}}
     "lint": "eslint --ext .js app{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}",
     {{/lint}}
-    "build": "babel-node build/build.js",
-    "iconfont": "babel-node build/iconfont.js"
+    "iconfont": "fontcustom compile",
+    "uploadfont": "phantomjs build/util/upload.js"
   },
   "browserify": {
     "transform": [
         "babelify"
-    ]  
+    ]
   },
   "devDependencies": {
     "gulp": "^3.9.1",

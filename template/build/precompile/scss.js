@@ -11,29 +11,29 @@ import cleanCss from 'clean-css';
  *
  */
 export default function (filePath, minify, callback) {
-    
+
     callback = callback || function () {};
-    
+
     sass.render(
         {
             file: filePath
         },
         (err, result) => {
-                        
+
             if (err) {
                 console.error(err);
                 return;
             }
-            
+
             if (!result) {
                 callback('');
                 return;
             }
-            
+
             postcss(
                 autoPrefixer(
                     {
-                        browsers: ['last 3 versions']
+                        browsers: ['last 5 iOS versions']
                     }
                 )
             )
@@ -49,5 +49,4 @@ export default function (filePath, minify, callback) {
         }
     )
 }
-
 

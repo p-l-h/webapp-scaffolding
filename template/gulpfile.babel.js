@@ -15,7 +15,6 @@ import dealJs from './build/precompile/babel';
 
 const isProd = args.prod;
 
-
 gulp.task('css', () => {
     gulp.src([
         'app/**/*.scss',
@@ -25,7 +24,6 @@ gulp.task('css', () => {
     .pipe(
         mapStream(
             (file, callback) => {
-
                 dealCss(file.path, isProd, (result) => {
                     file.contents = new Buffer(result);
                     file.path = file.path.replace('.scss', '.css');
@@ -72,10 +70,16 @@ gulp.task('html', () => {
             collapseWhitespace: true,
             ignoreCustomFragments: [ /\{%[\s\S]*?%\}/, /\{\{\?[\s\S]*?\?\}\}/]
         }))
-        .pipe(gulp.dest('output/app/'));
+        .pipe(gulp .dest('output/app/'));
 });
 
-gulp.task('md5', () => {
+
+
+
+
+gulp.task('default', ['js', 'css', 'html']);
+
+gulp.task('prod', ['default'], () => {
     gulp.task(['output/app/**/*.js', 'output/app/**/*.css'])
         .pipe(md5plus(10, 'output/app/**/*.html'))
         .pipe(gulp.dest('output/app/'));
