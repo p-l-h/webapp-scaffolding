@@ -60,7 +60,7 @@ gulp.task('js', () => {
 gulp.task('html', () => {
     gulp.src('app/**/*.html')
         {{#swig}}
-        .pipe(replace('{% parent %}', '{{ parent() }}'))
+        .pipe(replace('\{% parent %\}', '\{\{ parent() \}\}'))
         .pipe(replace(/!empty\((.*)\)/g, '$1 is not empty'))
         .pipe(replace('.length', '|length'))
         .pipe(replace('as macros', ''))
