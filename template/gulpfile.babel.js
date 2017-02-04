@@ -14,6 +14,7 @@ import dealCss from './build/precompile/scss';
 import dealJs from './build/precompile/babel';
 
 const isProd = args.prod;
+console.log(isProd);
 
 gulp.task('css', () => {
     gulp.src([
@@ -32,9 +33,7 @@ gulp.task('css', () => {
             }
         )
     )
-    .pipe(gulp.dest('output/app/'))
-
-
+    .pipe(gulp.dest('output/temp/'))
 });
 
 gulp.task('js', () => {
@@ -53,34 +52,37 @@ gulp.task('js', () => {
             }
         )
     )
-    .pipe(gulp.dest('output/app/'));
+    .pipe(gulp.dest('output/temp/'));
 });
 
 
 gulp.task('html', () => {
     gulp.src('app/**/*.html')
-        {{#swig}}
-        .pipe(replace('\{% parent %\}', '\{\{ parent() \}\}'))
-        .pipe(replace(/!empty\((.*)\)/g, '$1 is not empty'))
+        .pipe(replace('{% parent %}', '{{ parent() }}'))
+        .pipe(replace('{% raw %}', '{% verbatim %}'))
+        .pipe(replace('{% endraw %}', '{% endverbatim %}'))
+        .pipe(replace(/!empty\(([^)]*)\)/g, '$1 is not empty'))
         .pipe(replace('.length', '|length'))
         .pipe(replace('as macros', ''))
         .pipe(replace('macros.', ''))
-        {{/swig}}
         .pipe(htmlmin({
             collapseWhitespace: true,
             ignoreCustomFragments: [ /\{%[\s\S]*?%\}/, /\{\{\?[\s\S]*?\?\}\}/]
         }))
-        .pipe(gulp .dest('output/app/'));
+        .pipe(gulp.dest('output/app/'));
 });
-
-
-
-
 
 gulp.task('default', ['js', 'css', 'html']);
 
-gulp.task('prod', ['default'], () => {
-    gulp.task(['output/app/**/*.js', 'output/app/**/*.css'])
-        .pipe(md5plus(10, 'output/app/**/*.html'))
+gulp.task('dev', () => {
+    return gulp.src(['output/temp/*.js', 'output/temp/*.css'])
+        .pipe(gulp.dest('output/app/'));
+});
+
+gulp.task('prod', () => {
+    return gulp.src(['output/temp/*.js', 'output/temp/*.css'])
+        .pipe(md5plus(10, 'output/app/**/*.html', {
+            dirLevel: 0
+        }))
         .pipe(gulp.dest('output/app/'));
 });

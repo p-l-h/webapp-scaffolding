@@ -24,10 +24,6 @@ module.exports = {
       "type": "string",
       "message": "Author"
     },
-    "swig": {
-      "type": "confirm",
-      "message": "Use swig as the html template?"
-    },
     "localPort": {
       "type": "string",
       "message": "The local server port?"

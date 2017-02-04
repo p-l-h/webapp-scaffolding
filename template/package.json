@@ -28,7 +28,7 @@
     "browserify": "^13.0.1",
     "map-stream": "^0.0.6",
     "uglify-js": "^2.7.4",
-    "txicons": "^0.1.1",
+    "clean-css": 
     {{#lint}}
     "babel-eslint": "^7.0.0",
     {{/lint}}
@@ -37,6 +37,7 @@
     "babel-preset-stage-2": "^6.0.0",
     "babel-register": "^6.0.0",
     "chalk": "^1.1.3",
+    "clean-css": "^3.4.21",
     {{#lint}}
     "eslint": "^3.7.1",
     "eslint-friendly-formatter": "^2.0.5",
@@ -49,7 +50,6 @@
     {{/if_eq}}
     {{#if_eq lintConfig "airbnb"}}
     "eslint-config-airbnb-base": "^8.0.0",
-    "eslint-import-resolver-webpack": "^0.6.0",
     "eslint-plugin-import": "^1.16.0",
     {{/if_eq}}
     {{/lint}}
@@ -79,9 +79,7 @@
     "nightwatch": "^0.9.8",
     "selenium-server": "2.53.1",
     {{/e2e}}
-    {{#swig}}
     "swig": "^1.4.2",
-    {{/swig}}
     {{#browsersync}}
     "browser-sync": "^2.17.6",
     {{/browsersync}}
